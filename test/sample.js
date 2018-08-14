@@ -1,14 +1,17 @@
+var rp = require('request-promise');
 var expect = require('chai').expect;
 var https = require("https");
 var request = require('request');
 var env = require('./environment');
 
-describe("Dermalogica Categories", function(done) {
-  it("should display Open Categories", function(done) {
+describe("Sample", function() {
+  it("Sample promise request", function(done) {
     var count;
-    this.timeout(25000);
+    //this.timeout(25000);
     var key = "0000-00000-00000-0000";
     var options = {
+      method:'GET',
+      resolveWithFullResponse:true,
       "rejectUnauthorized": false,
       url: env.hostname + env.APIver + '/open/categories',
       headers: {
@@ -16,8 +19,9 @@ describe("Dermalogica Categories", function(done) {
       }
     };
     console.log(options);
-    request.get(options, function(err, res, body) {
-      body = JSON.parse(body);
+    rp(options).then(function (res) {
+      body = JSON.parse(res.body);
+      console.log(body);
       expect(res.statusCode).to.equal(200);
       var parent = body.length;
       console.log(parent);
@@ -58,7 +62,10 @@ describe("Dermalogica Categories", function(done) {
         expect(body[i]).to.have.own.property('createdBy');
         expect(body[i]).to.have.own.property('updatedBy');
       }
-      done();
     })
+    .catch(function (err) {
+      console.log(err);
+      done();
+    });
   });
 });

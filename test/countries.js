@@ -3,7 +3,29 @@ var https = require("https");
 var request = require('request');
 var env = require('./environment');
 
-describe("Dermalogica Open Countries", function(done) {
+function parameters(body,bodyKeys,count)
+{
+  for (var i = 0; i < count; i++) {
+  //console.log(bodyKeys);
+  console.log(body[i].name);
+  bodyKeys.every((prop) =>{
+    //console.log(body[i].hasOwnProperty(prop));
+    expect(body[i]).to.have.own.property(prop);
+    if(prop==='id')
+    {
+      expect(body[i][prop]).to.be.a('number');
+    }
+    else if (prop==='settingsKeyValues') {
+      expect(body[i][prop]).to.be.an('object');
+    }
+    else {
+      expect(body[i][prop]).to.be.a('string');
+
+    }
+})
+}
+}
+describe("Dermalogica Open Countries", function() {
   it("Open countries Face Mapping Consumer", function(done) {
     var count;
     this.timeout(25000);
@@ -18,39 +40,61 @@ describe("Dermalogica Open Countries", function(done) {
     //console.log(options);
     request.get(options, function(err, res, body) {
       body = JSON.parse(body);
+      var bodyKeys=['id','name','code','currency','facebook','twitter','instagram','pinterest','ecommerce','settingsKeyValues','language','langCode'];
       //console.log(body);
       expect(res.statusCode).to.equal(200);
       var count = body.length;
       console.log(count);
-      for (var i = 0; i < count; i++) {
-        console.log(body[i].name);
-        //console.log(body[i].language);
-        //console.log(body[i].langCode);
-        expect(body[i]).to.have.own.property('id');
-        expect(body[i].id).to.be.a('number');
-        expect(body[i]).to.have.own.property('name');
-        expect(body[i].name).to.be.a('string');
-        expect(body[i]).to.have.own.property('code');
-        expect(body[i].code).to.be.a('string');
-        expect(body[i]).to.have.own.property('currency');
-        expect(body[i].currency).to.be.a('string');
-        expect(body[i]).to.have.own.property('facebook');
-        expect(body[i].facebook).to.be.a('string');
-        expect(body[i]).to.have.own.property('twitter');
-        expect(body[i].twitter).to.be.a('string');
-        expect(body[i]).to.have.own.property('instagram');
-        expect(body[i].instagram).to.be.a('string');
-        expect(body[i]).to.have.own.property('pinterest');
-        expect(body[i].pinterest).to.be.a('string');
-        expect(body[i]).to.have.own.property('ecommerce');
-        expect(body[i].ecommerce).to.be.a('string');
-        expect(body[i]).to.have.own.property('settingsKeyValues');
-        expect(body[i].settingsKeyValues).to.be.an('object');
-        expect(body[i]).to.have.own.property('language');
-        expect(body[i].language).to.be.a('string');
-        expect(body[i]).to.have.own.property('langCode');
-        expect(body[i].langCode).to.be.a('string');
-      }
+      parameters(body,bodyKeys,count);
+      // for (var i = 0; i < count; i++) {
+      //   //var bodyKeys=Object.keys(body[i]);
+      //   var bodyKeys=['id','name','code','currency','facebook','twitter','instagram','pinterest','ecommerce','settingsKeyValues','language','langCode']
+      //   //console.log(bodyKeys);
+      //   console.log(body[i].name);
+      //   bodyKeys.every((prop) =>{
+      //     //console.log(body[i].hasOwnProperty(prop));
+      //     expect(body[i]).to.have.own.property(prop);
+      //     if(prop==='id')
+      //     {
+      //       expect(body[i][prop]).to.be.a('number');
+      //     }
+      //     else if (prop==='settingsKeyValues') {
+      //       expect(body[i][prop]).to.be.an('object');
+      //     }
+      //     else {
+      //       expect(body[i][prop]).to.be.a('string');
+      //
+      //     }
+      //
+      //   })
+      //   //console.log(body[i].language);
+      //   //console.log(body[i].langCode);
+      //
+      //   // expect(body[i]).to.have.own.property('id');
+      //   // expect(body[i].id).to.be.a('number');
+      //   // expect(body[i]).to.have.own.property('name');
+      //   // expect(body[i].name).to.be.a('string');
+      //   // expect(body[i]).to.have.own.property('code');
+      //   // expect(body[i].code).to.be.a('string');
+      //   // expect(body[i]).to.have.own.property('currency');
+      //   // expect(body[i].currency).to.be.a('string');
+      //   // expect(body[i]).to.have.own.property('facebook');
+      //   // expect(body[i].facebook).to.be.a('string');
+      //   // expect(body[i]).to.have.own.property('twitter');
+      //   // expect(body[i].twitter).to.be.a('string');
+      //   // expect(body[i]).to.have.own.property('instagram');
+      //   // expect(body[i].instagram).to.be.a('string');
+      //   // expect(body[i]).to.have.own.property('pinterest');
+      //   // expect(body[i].pinterest).to.be.a('string');
+      //   // expect(body[i]).to.have.own.property('ecommerce');
+      //   // expect(body[i].ecommerce).to.be.a('string');
+      //   // expect(body[i]).to.have.own.property('settingsKeyValues');
+      //   // expect(body[i].settingsKeyValues).to.be.an('object');
+      //   // expect(body[i]).to.have.own.property('language');
+      //   // expect(body[i].language).to.be.a('string');
+      //   // expect(body[i]).to.have.own.property('langCode');
+      //   // expect(body[i].langCode).to.be.a('string');
+      // }
       done();
     })
   });
