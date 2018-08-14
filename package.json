@@ -1,0 +1,22 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "test1",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha||true *.js"
+  },
+  "dependencies": {
+    "chai-http": "^4.0.0",
+    "request-promise": "^4.2.2",
+    "then-request": "^6.0.0"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^3.5.0",
+    "mocha-simple-html-reporter": "^1.1.0",
+    "request": "^2.88.0"
+  }
+}
