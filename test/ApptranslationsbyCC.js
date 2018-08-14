@@ -4,10 +4,10 @@ var request = require('request');
 var env = require('./environment');
 
 
-function input(key, langCode) {
+function input(key, countryName) {
   var options = {
     "rejectUnauthorized": false,
-    url: env.hostname + env.APIver + '/open/getTranslations/lang/' + langCode,
+    url: env.hostname + env.APIver + '/open/getTranslations/' + countryName,
     headers: {
       'API-KEY': key,
     }
@@ -28,14 +28,14 @@ describe("Dermalogica", function() {
   it("This should check for ALL Open App translations products in the US", function(done) {
     this.timeout(5000);
     var key = "ef75a003-8dff-4698-8e3a-445ef976b2f1";
-    var langCode = "en-US";
+    var countryName = "CA";
     //var lang = langCode.split("-");
     //console.log(lang[1]);
-    var inputvalues = input(key, langCode);
+    var inputvalues = input(key, countryName);
     request.get(inputvalues, function(err, res, body) {
       body = JSON.parse(body);
       parameters(body);
-      //expect(body.countryCode).to.be.equal(lang[1]);
+      expect(body.countryCode).to.be.equal(countryName);
       done();
     })
   });
