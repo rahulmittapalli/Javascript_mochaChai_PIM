@@ -2,18 +2,7 @@ var expect = require('chai').expect;
 var https = require("https");
 var request = require('request');
 var env = require('./environment');
-
-
-function input(key, langCode) {
-  var options = {
-    "rejectUnauthorized": false,
-    url: env.hostname + env.APIver + '/open/getTranslations/lang/' + langCode,
-    headers: {
-      'API-KEY': key,
-    }
-  }
-  return options;
-}
+var fun=require('./function');
 
 function parameters(body) {
   var bodyKeys = ['countryCode', 'showChat', 'currencySymbol', 'currencyAbbreviation', 'LandingPage_title'];
@@ -22,6 +11,19 @@ function parameters(body) {
     expect(body[prop]).to.be.a('string');
   })
 }
+function callback (body, res){
+    body = JSON.parse(body);
+    expect(res.statusCode).to.equal(200);
+    var count = body.length;
+    console.log(count);
+    parameters(body, count);
+}
+function requester (inputvalues, done, callback){
+    request.get(inputvalues, function(err, res, body) {
+      callback(body, res);
+      done();
+    })
+}
 
 describe("Dermalogica", function() {
   this.timeout(5000);
@@ -29,14 +31,8 @@ describe("Dermalogica", function() {
     this.timeout(5000);
     var key = "ef75a003-8dff-4698-8e3a-445ef976b2f1";
     var langCode = "en-US";
-    //var lang = langCode.split("-");
-    //console.log(lang[1]);
-    var inputvalues = input(key, langCode);
-    request.get(inputvalues, function(err, res, body) {
-      body = JSON.parse(body);
-      parameters(body);
-      //expect(body.countryCode).to.be.equal(lang[1]);
-      done();
+    var subPath="/open/getTranslations/lang/"+langCode;
+    var inputvalues = fun.input(key,subPath);
+    requester(inputvalues, done,callback);
     })
   });
-});
