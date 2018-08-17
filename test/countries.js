@@ -7,7 +7,7 @@ function parameters(body,bodyKeys,count)
 {
   for (var i = 0; i < count; i++) {
   //console.log(bodyKeys);
-  console.log(body[i].name);
+//  console.log(body[i].name);
   bodyKeys.every((prop) =>{
     //console.log(body[i].hasOwnProperty(prop));
     expect(body[i]).to.have.own.property(prop);
@@ -44,7 +44,7 @@ describe("Dermalogica Open Countries", function() {
       //console.log(body);
       expect(res.statusCode).to.equal(200);
       var count = body.length;
-      console.log(count);
+      //console.log(count);
       parameters(body,bodyKeys,count);
       // for (var i = 0; i < count; i++) {
       //   //var bodyKeys=Object.keys(body[i]);
@@ -115,9 +115,9 @@ describe("Dermalogica Open Countries", function() {
       //console.log(body);
       expect(res.statusCode).to.equal(200);
       var count = body.length;
-      console.log(count);
+      //console.log(count);
       for (var i = 0; i < count; i++) {
-        console.log(body[i].name);
+        //console.log(body[i].name);
         //console.log(body[i].language);
         //console.log(body[i].langCode);
         expect(body[i]).to.have.own.property('id');
@@ -167,7 +167,7 @@ describe("Dermalogica Open Countries", function() {
       var count = body.length;
       console.log(count);
       for (var i = 0; i < count; i++) {
-        console.log(body[i].name);
+      //  console.log(body[i].name);
         //console.log(body[i].language);
         //console.log(body[i].langCode);
         expect(body[i]).to.have.own.property('id');
@@ -217,7 +217,7 @@ describe("Dermalogica Open Countries", function() {
       var count = body.length;
       console.log(count);
       for (var i = 0; i < count; i++) {
-        console.log(body[i].name);
+        //console.log(body[i].name);
         //console.log(body[i].language);
         //console.log(body[i].langCode);
         expect(body[i]).to.have.own.property('id');
@@ -267,7 +267,7 @@ describe("Dermalogica Open Countries", function() {
       var count = body.length;
       console.log(count);
       for (var i = 0; i < count; i++) {
-        console.log(body[i].name);
+        //console.log(body[i].name);
         //console.log(body[i].language);
         //console.log(body[i].langCode);
         expect(body[i]).to.have.own.property('id');
@@ -315,9 +315,9 @@ describe("Dermalogica Open Countries", function() {
       //console.log(body);
       expect(res.statusCode).to.equal(200);
       var count = body.length;
-      console.log(count);
+      //console.log(count);
       for (var i = 0; i < count; i++) {
-        console.log(body[i].name);
+        //console.log(body[i].name);
         //console.log(body[i].language);
         //console.log(body[i].langCode);
         expect(body[i]).to.have.own.property('id');

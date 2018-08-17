@@ -23,12 +23,12 @@ describe("login",function(done){
       'Content-Type':"application/x-www-form-urlencoded"
     }
       };
-      console.log(options);
+      //console.log(options);
   // request.post({url:env.hostname+env.APIver+'/therapist/add',},
   request.post(options,function (err, res, body){
     //console.log(err);
     body=JSON.parse(body);
-    console.log(body);
+    //console.log(body);
     token=body.accessToken;
     expect(res.statusCode).to.equal(200);
     expect(body).to.have.own.property('authsuccess');

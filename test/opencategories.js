@@ -15,19 +15,19 @@ describe("Dermalogica Categories", function(done) {
         'API-KEY': key,
       }
     };
-    console.log(options);
+    //console.log(options);
     request.get(options, function(err, res, body) {
       body = JSON.parse(body);
       expect(res.statusCode).to.equal(200);
       var parent = body.length;
-      console.log(parent);
+      //console.log(parent);
       for (var i = 0; i < parent; i++) {
         if (body[i].children) {
           var count = body[i].children.length;
-          console.log(count);
+          //console.log(count);
           for (var j = 0; j < count; j++) {
             //console.log(body[0]);
-            console.log(body[i].children[j].name);
+            //console.log(body[i].children[j].name);
             expect(body[i].children[j]).to.have.own.property('name');
             expect(body[i].children[j].name).to.not.to.be.null;
             expect(body[i].children[j]).to.have.own.property('description');
@@ -43,7 +43,7 @@ describe("Dermalogica Categories", function(done) {
             expect(body[i].children[j]).to.have.own.property('updatedBy');
           }
         }
-        console.log(body[i].name);
+        //console.log(body[i].name);
         expect(body[i]).to.have.own.property('name');
         expect(body[i].name).to.not.to.be.null;
         expect(body[i]).to.have.own.property('description');

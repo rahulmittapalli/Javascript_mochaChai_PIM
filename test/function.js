@@ -5,19 +5,24 @@ var env = require('./environment');
 
 var input = function (key, subPath) {
   var options = {
+    method:'GET',
     "rejectUnauthorized": false,
     url: env.hostname + env.APIver + subPath,
     headers: {
       'API-KEY': key,
     }
   }
-  console.log(options);
+  //console.log(options);
   return options;
 }
+
 var parameters = function (body, count) {
   var bodyKeys = ['id', 'name', 'code', 'currency', 'facebook', 'twitter', 'instagram', 'pinterest', 'ecommerce', 'settingsKeyValues', 'language', 'langCode'];
   for (var i = 0; i < count; i++) {
-    console.log(body[i].name);
+    //console.log(body[i].name);
+    if(body[i].langCode){
+  //  console.log("LangCodes are "+body[i].langCode);
+    }
     bodyKeys.every((prop) => {
       expect(body[i]).to.have.own.property(prop);
       if (prop === 'id') {
@@ -34,11 +39,11 @@ var callback=function (body, res){
     body = JSON.parse(body);
     expect(res.statusCode).to.equal(200);
     var count = body.length;
-    console.log(count);
+    //console.log(count);
     parameters(body, count);
 }
 var requester=function (inputvalues, done, callback){
-    request.get(inputvalues, function(err, res, body) {
+    request(inputvalues, function(err, res, body) {
       callback(body, res);
       done();
     })
@@ -47,7 +52,7 @@ var requester=function (inputvalues, done, callback){
 var matrixcall=function(body,count){
     for (var i = 0; i < count; i++) {
       for (var j = 0; j < body[i].length; j++) {
-        console.log(body[i].length);
+        //console.log(body[i].length);
         expect(body[i][j]).to.have.own.property('name');
         expect(body[i][j].name).to.be.a('string');
         expect(body[i][j]).to.have.own.property('subtitle');
@@ -86,25 +91,25 @@ var matrixcall=function(body,count){
           expect(body[i][j].productHasSizes[k].products_has_sizes).to.have.own.property('imageUrl');
           expect(body[i][j].productHasSizes[k].products_has_sizes.imageUrl).to.be.a('string');
           var imageUrl = body[i][j].productHasSizes[k].products_has_sizes.imageUrl.length;
-          console.log("imageUrl =" + imageUrl);
+          //console.log("imageUrl =" + imageUrl);
           if (imageUrl === 0) {
-            console.log("Product Name is " + body[i][j].name);
+            //console.log("Product Name is " + body[i][j].name);
             console.log("Product size imageUrl is missing in this product " + body[i][j].name);
           }
           expect(body[i][j].productHasSizes[k].products_has_sizes.imageUrl.length).to.be.above(1)
           expect(body[i][j].productHasSizes[k].products_has_sizes).to.have.own.property('thumbUrl');
           var thumbUrl = body[i][j].productHasSizes[k].products_has_sizes.thumbUrl.length;
-          console.log("thumbUrl =" + thumbUrl);
+          //console.log("thumbUrl =" + thumbUrl);
           if (thumbUrl === 0) {
-            console.log("Product Name is " + body[i][j].name);
+            //console.log("Product Name is " + body[i][j].name);
             console.log("Product size thumbUrl is missing in this product " + body[i][j].name);
           }
           expect(body[i][j].productHasSizes[k].products_has_sizes.thumbUrl.length).to.be.above(1)
           expect(body[i][j].productHasSizes[k].products_has_sizes).to.have.own.property('siliconImage');
           var siliconImage = body[i][j].productHasSizes[k].products_has_sizes.siliconImage.length;
-          console.log("siliconImage =" + siliconImage);
+          //console.log("siliconImage =" + siliconImage);
           if (siliconImage === 0) {
-            console.log("Product Name is " + body[i][j].name);
+            //console.log("Product Name is " + body[i][j].name);
             console.log("Product size siliconImage is missing in this product " + body[i][j].name);
           }
           expect(body[i][j].productHasSizes[k].products_has_sizes.siliconImage.length).to.be.above(1)
@@ -141,7 +146,7 @@ var matrixcall=function(body,count){
     for (var i = 0; i < count; i++) {
       expect(body[i]).to.have.own.property('name');
       for (var j = 0; j < body[i].products.length; j++) {
-        console.log(body[i].products.length);
+        //console.log(body[i].products.length);
         expect(body[i].products[j]).to.have.own.property('name');
         expect(body[i].products[j].name).to.be.a('string');
         expect(body[i].products[j]).to.have.own.property('subtitle');
@@ -180,25 +185,25 @@ var matrixcall=function(body,count){
           expect(body[i].products[j].productHasSizes[k].products_has_sizes).to.have.own.property('imageUrl');
           expect(body[i].products[j].productHasSizes[k].products_has_sizes.imageUrl).to.be.a('string');
           var imageUrl = body[i].products[j].productHasSizes[k].products_has_sizes.imageUrl.length;
-          console.log("imageUrl =" + imageUrl);
+          //console.log("imageUrl =" + imageUrl);
           if (imageUrl === 0) {
-            console.log("Product Name is " + body[i].products[j].name);
+            //console.log("Product Name is " + body[i].products[j].name);
             console.log("Product size imageUrl is missing in this product " + body[i].products[j].name);
           }
           expect(body[i].products[j].productHasSizes[k].products_has_sizes.imageUrl.length).to.be.above(1)
           expect(body[i].products[j].productHasSizes[k].products_has_sizes).to.have.own.property('thumbUrl');
           var thumbUrl = body[i].products[j].productHasSizes[k].products_has_sizes.thumbUrl.length;
-          console.log("thumbUrl =" + thumbUrl);
+          //console.log("thumbUrl =" + thumbUrl);
           if (thumbUrl === 0) {
-            console.log("Product Name is " + body[i].products[j].name);
+            //console.log("Product Name is " + body[i].products[j].name);
             console.log("Product size thumbUrl is missing in this product " + body[i].products[j].name);
           }
           expect(body[i].products[j].productHasSizes[k].products_has_sizes.thumbUrl.length).to.be.above(1)
           expect(body[i].products[j].productHasSizes[k].products_has_sizes).to.have.own.property('siliconImage');
           var siliconImage = body[i].products[j].productHasSizes[k].products_has_sizes.siliconImage.length;
-          console.log("siliconImage =" + siliconImage);
+          //console.log("siliconImage =" + siliconImage);
           if (siliconImage === 0) {
-            console.log("Product Name is " + body[i].products[j].name);
+            //console.log("Product Name is " + body[i].products[j].name);
             console.log("Product size siliconImage is missing in this product " + body[i].products[j].name);
           }
           expect(body[i].products[j].productHasSizes[k].products_has_sizes.siliconImage.length).to.be.above(1)
@@ -262,28 +267,28 @@ var productscall= function(body,count)
       expect(body[i].productHasSizes[j].products_has_sizes).to.have.own.property('imageUrl');
       expect(body[i].productHasSizes[j].products_has_sizes.imageUrl).to.be.a('string');
       var imageUrl=body[i].productHasSizes[j].products_has_sizes.imageUrl.length;
-      console.log("imageUrl ="+imageUrl);
+      //console.log("imageUrl ="+imageUrl);
       if(imageUrl===0)
       {
-        console.log("Product Name is "+body[i].name);
+        //console.log("Product Name is "+body[i].name);
         console.log("Product size imageUrl is missing in this product "+body[i].name);
       }
       expect(body[i].productHasSizes[j].products_has_sizes.imageUrl.length).to.be.above(1)
       expect(body[i].productHasSizes[j].products_has_sizes).to.have.own.property('thumbUrl');
       var thumbUrl=body[i].productHasSizes[j].products_has_sizes.thumbUrl.length;
-      console.log("thumbUrl ="+thumbUrl);
+      //console.log("thumbUrl ="+thumbUrl);
       if(thumbUrl===0)
       {
-        console.log("Product Name is "+body[i].name);
+        //console.log("Product Name is "+body[i].name);
         console.log("Product size thumbUrl is missing in this product "+body[i].name);
       }
       expect(body[i].productHasSizes[j].products_has_sizes.thumbUrl.length).to.be.above(1)
       expect(body[i].productHasSizes[j].products_has_sizes).to.have.own.property('siliconImage');
       var siliconImage=body[i].productHasSizes[j].products_has_sizes.siliconImage.length;
-      console.log("siliconImage ="+siliconImage);
+      //console.log("siliconImage ="+siliconImage);
       if(siliconImage===0)
       {
-        console.log("Product Name is "+body[i].name);
+        //console.log("Product Name is "+body[i].name);
         console.log("Product size siliconImage is missing in this product "+body[i].name);
       }
       expect(body[i].productHasSizes[j].products_has_sizes.siliconImage.length).to.be.above(1)

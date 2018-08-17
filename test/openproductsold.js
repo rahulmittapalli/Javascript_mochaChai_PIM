@@ -8,8 +8,8 @@ describe("Dermalogica", function() {
     var count;
     this.timeout(25000);
     var key = "0000-00000-00000-0000";
-    var inputvalues=input(key,subPath);
-    console.log(options);
+    var inputvalues=fun.input(key,subPath);
+    //console.log(options);
     request.get(options, function(err, res, body) {
       body = JSON.parse(body);
       expect(res.statusCode).to.equal(200);
@@ -56,28 +56,28 @@ describe("Dermalogica", function() {
           expect(body[i].productHasSizes[j].products_has_sizes).to.have.own.property('imageUrl');
           expect(body[i].productHasSizes[j].products_has_sizes.imageUrl).to.be.a('string');
           var imageUrl=body[i].productHasSizes[j].products_has_sizes.imageUrl.length;
-          console.log("imageUrl ="+imageUrl);
+          //console.log("imageUrl ="+imageUrl);
           if(imageUrl===0)
           {
-            console.log("Product Name is "+body[i].name);
+            //console.log("Product Name is "+body[i].name);
             console.log("Product size imageUrl is missing in this product "+body[i].name);
           }
           expect(body[i].productHasSizes[j].products_has_sizes.imageUrl.length).to.be.above(1)
           expect(body[i].productHasSizes[j].products_has_sizes).to.have.own.property('thumbUrl');
           var thumbUrl=body[i].productHasSizes[j].products_has_sizes.thumbUrl.length;
-          console.log("thumbUrl ="+thumbUrl);
+          //console.log("thumbUrl ="+thumbUrl);
           if(thumbUrl===0)
           {
-            console.log("Product Name is "+body[i].name);
+            //console.log("Product Name is "+body[i].name);
             console.log("Product size thumbUrl is missing in this product "+body[i].name);
           }
           expect(body[i].productHasSizes[j].products_has_sizes.thumbUrl.length).to.be.above(1)
           expect(body[i].productHasSizes[j].products_has_sizes).to.have.own.property('siliconImage');
           var siliconImage=body[i].productHasSizes[j].products_has_sizes.siliconImage.length;
-          console.log("siliconImage ="+siliconImage);
+          //console.log("siliconImage ="+siliconImage);
           if(siliconImage===0)
           {
-            console.log("Product Name is "+body[i].name);
+            //console.log("Product Name is "+body[i].name);
             console.log("Product size siliconImage is missing in this product "+body[i].name);
           }
           expect(body[i].productHasSizes[j].products_has_sizes.siliconImage.length).to.be.above(1)

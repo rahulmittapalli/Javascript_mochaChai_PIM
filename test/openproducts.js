@@ -12,7 +12,7 @@ describe("Dermalogica", function() {
     this.timeout(45000);
     var key = "0000-00000-00000-0000";
     var inputvalues=fun.input(key,subPath);
-    console.log(inputvalues);
+    //console.log(inputvalues);
     request.get(inputvalues, function(err, res, body) {
       body = JSON.parse(body);
       expect(res.statusCode).to.equal(200);

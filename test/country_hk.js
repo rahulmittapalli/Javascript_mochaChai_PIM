@@ -17,7 +17,7 @@ function input(key) {
 function parameters(body, count) {
   var bodyKeys = ['id', 'name', 'code', 'currency', 'facebook', 'twitter', 'instagram', 'pinterest', 'ecommerce', 'settingsKeyValues', 'language', 'langCode'];
   for (var i = 0; i < count; i++) {
-    console.log(body[i].name);
+    //console.log(body[i].name);
     bodyKeys.every((prop) => {
       expect(body[i]).to.have.own.property(prop);
       if (prop === 'id') {
@@ -42,7 +42,7 @@ function callback(body, res){
     body = JSON.parse(body);
     expect(res.statusCode).to.equal(200);
     var count = body.length;
-    console.log(count);
+    //console.log(count);
     parameters(body, count);
 }
 
