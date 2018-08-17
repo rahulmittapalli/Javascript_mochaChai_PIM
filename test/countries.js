@@ -165,7 +165,7 @@ describe("Dermalogica Open Countries", function() {
       //console.log(body);
       expect(res.statusCode).to.equal(200);
       var count = body.length;
-      console.log(count);
+      //console.log(count);
       for (var i = 0; i < count; i++) {
       //  console.log(body[i].name);
         //console.log(body[i].language);
