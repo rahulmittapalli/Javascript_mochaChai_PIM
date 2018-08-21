@@ -3,18 +3,19 @@ var https = require("https");
 var request = require('request');
 var env = require('./environment');
 var fun = require('./function');
-var subPath="/open/countries/valid";
+var subPath = "/open/products";
 
 
 describe("Dermalogica", function() {
+  this.timeout(35000);
   it("This should check for ALL Open products", function(done) {
     var count;
-    this.timeout(25000);
     var key = "0000-00000-00000-0000";
     var inputvalues = fun.input(key, subPath);
-    //console.log(options);
-    request.get(options, function(err, res, body) {
+    //console.log(inputvalues);
+    request(inputvalues, function(err, res, body) {
       body = JSON.parse(body);
+      //console.log(body);
       expect(res.statusCode).to.equal(200);
       var count = body.length;
       for (var i = 0; i < count; i++) {
