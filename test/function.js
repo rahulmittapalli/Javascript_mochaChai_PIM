@@ -309,6 +309,90 @@ var productscall= function(body,count)
      }
   }
 }
+var plandc=function(body)
+ {
+      expect(body).to.have.own.property('name');
+      expect(body.name).to.be.a('string');
+      expect(body).to.have.own.property('subtitle');
+      expect(body.subtitle).to.be.a('string');
+      expect(body).to.have.own.property('description');
+      expect(body.description).to.be.a('string');
+      expect(body).to.have.own.property('imageUrl');
+      expect(body.imageUrl).to.be.a('string');
+      expect(body).to.have.own.property('thumbUrl');
+      expect(body.thumbUrl).to.be.a('string');
+      expect(body).to.have.own.property('consumerIngredients');
+      expect(body.consumerIngredients).to.be.a('string');
+      expect(body).to.have.own.property('ingredients');
+      expect(body.ingredients).to.be.a('string');
+      expect(body).to.have.own.property('startDateTime');
+      expect(body).to.have.own.property('endDateTime');
+      expect(body).to.have.own.property('url');
+      expect(body.url).to.be.a('string');
+      expect(body).to.have.own.property('id');
+      expect(body.id).to.be.a('number');
+      expect(body).to.have.own.property('createdAt');
+      expect(body).to.have.own.property('updatedAt');
+      expect(body).to.have.own.property('productHasCategory');
+      expect(body.productHasCategory).to.be.an('array');
+      for(var j=0;j<body.productHasCategory.length;j++)
+      {
+        expect(body.productHasCategory[j]).to.have.own.property('name');
+      }
+      expect(body).to.have.own.property('productHasAttributes');
+      expect(body.productHasAttributes).to.be.an('array');
+      for(var j=0;j<body.productHasAttributes.length;j++)
+      {
+        expect(body.productHasAttributes[j]).to.have.own.property('name');
+      }
+      expect(body).to.have.own.property('productHasSizes');
+      expect(body.productHasSizes).to.be.an('array');
+      for(var j=0;j<body.productHasSizes.length;j++)
+      {
+        expect(body.productHasSizes[j].products_has_sizes).to.have.own.property('imageUrl');
+        expect(body.productHasSizes[j].products_has_sizes.imageUrl).to.be.a('string');
+        var imageUrl=body.productHasSizes[j].products_has_sizes.imageUrl.length;
+        //console.log("imageUrl ="+imageUrl);
+        if(imageUrl===0)
+        {
+          //console.log("Product Name is "+body.name);
+          console.log("Product size imageUrl is missing in this product "+body.name);
+        }
+        expect(body.productHasSizes[j].products_has_sizes.imageUrl.length).to.be.above(1)
+        expect(body.productHasSizes[j].products_has_sizes).to.have.own.property('thumbUrl');
+        var thumbUrl=body.productHasSizes[j].products_has_sizes.thumbUrl.length;
+        //console.log("thumbUrl ="+thumbUrl);
+        if(thumbUrl===0)
+        {
+          //console.log("Product Name is "+body.name);
+          console.log("Product size thumbUrl is missing in this product "+body.name);
+        }
+        expect(body.productHasSizes[j].products_has_sizes.thumbUrl.length).to.be.above(1)
+        expect(body.productHasSizes[j].products_has_sizes).to.have.own.property('siliconImage');
+        var siliconImage=body.productHasSizes[j].products_has_sizes.siliconImage.length;
+        //console.log("siliconImage ="+siliconImage);
+        if(siliconImage===0)
+        {
+          //console.log("Product Name is "+body.name);
+          console.log("Product size siliconImage is missing in this product "+body.name);
+        }
+        expect(body.productHasSizes[j].products_has_sizes.siliconImage.length).to.be.above(1)
+      }
+      expect(body).to.have.own.property('productHasIngredients');
+      expect(body.productHasIngredients).to.be.an('array');
+      for(var j=0;j<body.productHasIngredients.length;j++)
+      {
+        expect(body.productHasIngredients[j]).to.have.own.property('name');
+      }
+      expect(body).to.have.own.property('productHasProfessionalApplication');
+      expect(body.productHasProfessionalApplication).to.be.an('array');
+       expect(body).to.have.own.property('topRecommendedProduct');
+       expect(body.topRecommendedProduct).to.be.an('array');
+       for(var j=0;j<body.topRecommendedProduct.length;j++)
+       {
+         expect(body.topRecommendedProduct[j]).to.have.own.property('product_id');
+       }
+    }
 
 module.exports={
   input:input,
@@ -317,5 +401,6 @@ module.exports={
   requester:requester,
   matrixcall:matrixcall,
   listcall:listcall,
-  productscall:productscall
+  productscall:productscall,
+  plandc:plandc
 }
