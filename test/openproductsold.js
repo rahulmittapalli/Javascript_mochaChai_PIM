@@ -2,13 +2,14 @@ var expect = require('chai').expect;
 var https = require("https");
 var request = require('request');
 var env = require('./environment');
+var fun = require('./function');
 
 describe("Dermalogica", function() {
   it("This should check for ALL Open products", function(done) {
     var count;
     this.timeout(25000);
     var key = "0000-00000-00000-0000";
-    var inputvalues=fun.input(key,subPath);
+    var inputvalues = fun.input(key, subPath);
     //console.log(options);
     request.get(options, function(err, res, body) {
       body = JSON.parse(body);
@@ -39,63 +40,55 @@ describe("Dermalogica", function() {
         expect(body[i]).to.have.own.property('updatedAt');
         expect(body[i]).to.have.own.property('productHasCategory');
         expect(body[i].productHasCategory).to.be.an('array');
-        for(var j=0;j<body[i].productHasCategory.length;j++)
-        {
+        for (var j = 0; j < body[i].productHasCategory.length; j++) {
           expect(body[i].productHasCategory[j]).to.have.own.property('name');
         }
         expect(body[i]).to.have.own.property('productHasAttributes');
         expect(body[i].productHasAttributes).to.be.an('array');
-        for(var j=0;j<body[i].productHasAttributes.length;j++)
-        {
+        for (var j = 0; j < body[i].productHasAttributes.length; j++) {
           expect(body[i].productHasAttributes[j]).to.have.own.property('name');
         }
         expect(body[i]).to.have.own.property('productHasSizes');
         expect(body[i].productHasSizes).to.be.an('array');
-        for(var j=0;j<body[i].productHasSizes.length;j++)
-        {
+        for (var j = 0; j < body[i].productHasSizes.length; j++) {
           expect(body[i].productHasSizes[j].products_has_sizes).to.have.own.property('imageUrl');
           expect(body[i].productHasSizes[j].products_has_sizes.imageUrl).to.be.a('string');
-          var imageUrl=body[i].productHasSizes[j].products_has_sizes.imageUrl.length;
+          var imageUrl = body[i].productHasSizes[j].products_has_sizes.imageUrl.length;
           //console.log("imageUrl ="+imageUrl);
-          if(imageUrl===0)
-          {
+          if (imageUrl === 0) {
             //console.log("Product Name is "+body[i].name);
-            console.log("Product size imageUrl is missing in this product "+body[i].name);
+            console.log("Product size imageUrl is missing in this product " + body[i].name);
           }
           expect(body[i].productHasSizes[j].products_has_sizes.imageUrl.length).to.be.above(1)
           expect(body[i].productHasSizes[j].products_has_sizes).to.have.own.property('thumbUrl');
-          var thumbUrl=body[i].productHasSizes[j].products_has_sizes.thumbUrl.length;
+          var thumbUrl = body[i].productHasSizes[j].products_has_sizes.thumbUrl.length;
           //console.log("thumbUrl ="+thumbUrl);
-          if(thumbUrl===0)
-          {
+          if (thumbUrl === 0) {
             //console.log("Product Name is "+body[i].name);
-            console.log("Product size thumbUrl is missing in this product "+body[i].name);
+            console.log("Product size thumbUrl is missing in this product " + body[i].name);
           }
           expect(body[i].productHasSizes[j].products_has_sizes.thumbUrl.length).to.be.above(1)
           expect(body[i].productHasSizes[j].products_has_sizes).to.have.own.property('siliconImage');
-          var siliconImage=body[i].productHasSizes[j].products_has_sizes.siliconImage.length;
+          var siliconImage = body[i].productHasSizes[j].products_has_sizes.siliconImage.length;
           //console.log("siliconImage ="+siliconImage);
-          if(siliconImage===0)
-          {
+          if (siliconImage === 0) {
             //console.log("Product Name is "+body[i].name);
-            console.log("Product size siliconImage is missing in this product "+body[i].name);
+            console.log("Product size siliconImage is missing in this product " + body[i].name);
           }
           expect(body[i].productHasSizes[j].products_has_sizes.siliconImage.length).to.be.above(1)
         }
         expect(body[i]).to.have.own.property('productHasIngredients');
         expect(body[i].productHasIngredients).to.be.an('array');
-        for(var j=0;j<body[i].productHasIngredients.length;j++)
-        {
+        for (var j = 0; j < body[i].productHasIngredients.length; j++) {
           expect(body[i].productHasIngredients[j]).to.have.own.property('name');
         }
         expect(body[i]).to.have.own.property('productHasProfessionalApplication');
         expect(body[i].productHasProfessionalApplication).to.be.an('array');
-         expect(body[i]).to.have.own.property('topRecommendedProduct');
-         expect(body[i].topRecommendedProduct).to.be.an('array');
-         for(var j=0;j<body[i].topRecommendedProduct.length;j++)
-         {
-           expect(body[i].topRecommendedProduct[j]).to.have.own.property('product_id');
-         }
+        expect(body[i]).to.have.own.property('topRecommendedProduct');
+        expect(body[i].topRecommendedProduct).to.be.an('array');
+        for (var j = 0; j < body[i].topRecommendedProduct.length; j++) {
+          expect(body[i].topRecommendedProduct[j]).to.have.own.property('product_id');
+        }
       }
       setTimeout(done, 25000);
     })

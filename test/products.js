@@ -83,12 +83,12 @@ function checklength(arr, prop) {
           checkName(body[i].productHasSizes, 'id');
           checkName(body[i].productHasIngredients, 'name');
           checkName(body[i].topRecommendedProduct, 'product_id');
-          checkName(body[i].productHasSizes[j].products_has_sizes, 'imageUrl');
-          checkName(body[i].productHasSizes[j].products_has_sizes, 'thumbUrl');
-          checkName(body[i].productHasSizes[j].products_has_sizes, 'siliconImage');
-          checklength(body[i].productHasSizes[j].products_has_sizes, 'imageUrl');
-          checklength(body[i].productHasSizes[j].products_has_sizes, 'thumbUrl');
-          checklength(body[i].productHasSizes[j].products_has_sizes, 'siliconImage');
+          // checkName(body[i].productHasSizes[j].products_has_sizes, 'imageUrl');
+          // checkName(body[i].productHasSizes[j].products_has_sizes, 'thumbUrl');
+          // checkName(body[i].productHasSizes[j].products_has_sizes, 'siliconImage');
+          // checklength(body[i].productHasSizes[j].products_has_sizes, 'imageUrl');
+          // checklength(body[i].productHasSizes[j].products_has_sizes, 'thumbUrl');
+          // checklength(body[i].productHasSizes[j].products_has_sizes, 'siliconImage');
         }
         done();
       })
