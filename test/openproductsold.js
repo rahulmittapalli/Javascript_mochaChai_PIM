@@ -3,6 +3,8 @@ var https = require("https");
 var request = require('request');
 var env = require('./environment');
 var fun = require('./function');
+var subPath="/open/countries/valid";
+
 
 describe("Dermalogica", function() {
   it("This should check for ALL Open products", function(done) {
