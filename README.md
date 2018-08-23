@@ -1,3 +1,3 @@
 # mochaChai
 Command to test the files
-npm test
+"npm test"
