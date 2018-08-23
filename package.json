@@ -1,11 +1,12 @@
 {
-  "name": "mocha chai",
+  "name": "mochachai",
   "version": "1.0.0",
   "description": "Testing",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test -R mochawesome --reporter-options reportDir=/Users/rahulmittapalli/Desktop,reportFilename=reports||true",
-    "secondCommand" : "test : mocha test -R mochawesome||true"
+    "test":"mocha test -R mochawesome||true",
+    "secondCommand" : "mocha test -R mochawesome --reporter-options reportDir=Path,reportFilename=reports||true"
+
   },
 
   "dependencies": {
