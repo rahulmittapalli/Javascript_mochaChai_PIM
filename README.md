@@ -1,2 +1,3 @@
 # mochaChai
-Dermalogica PIM 
+Command to test the files
+npm test

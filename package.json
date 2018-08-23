@@ -1,7 +1,7 @@
 {
-  "name": "PIM",
+  "name": "mocha chai",
   "version": "1.0.0",
-  "description": "Product Information Management",
+  "description": "Testing",
   "main": "index.js",
   "scripts": {
     "test": "mocha test -R mochawesome --reporter-options reportDir=/Users/rahulmittapalli/Desktop,reportFilename=reports||true",
