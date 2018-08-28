@@ -4,11 +4,9 @@
   "description": "Testing",
   "main": "index.js",
   "scripts": {
-    "test":"mocha test -R mochawesome||true",
-    "secondCommand" : "mocha test -R mochawesome --reporter-options reportDir=Path,reportFilename=reports||true"
-
+    "test": "mocha test -R mochawesome||true",
+    "secondCommand": "mocha test -R mochawesome --reporter-options reportDir=Path,reportFilename=reports||true"
   },
-
   "dependencies": {
     "chai-http": "^4.0.0"
   },
