@@ -2,32 +2,19 @@ var expect = require('chai').expect;
 var https = require("https");
 var request = require('request');
 var env = require('./environment');
-var fun = require('./function');
+var fun = require('./main');
 
-function input(key, productid, langCode) {
-  var options = {
-    method: 'GET',
-    "rejectUnauthorized": false,
-    url: env.hostname + env.APIver + '/open/products/' + productid + langCode,
-    headers: {
-      'API-KEY': key,
-    }
-  }
-  return options;
-}
+
 describe("Dermalogica", function() {
-  this.timeout(5000);
-  it("This should check for open API products with langCode and Product ID ", function(done) {
-    this.timeout(5000);
+  this.timeout(60000);
+  it("This should check for ALL Open products", function(done) {
     var key = "0000-00000-00000-0000";
     var productid = 223;
     var langCode = "en-US";
-    var inputvalues = input(key, productid, langCode);
-    request(inputvalues, function(err, res, body) {
-      body = JSON.parse(body);
-      //console.log(body);
-      fun.plandc(body);
-      done();
-    })
+    var subPath = "/open/products/" + productid + "/" + langCode;
+    //console.log(subPath);
+    var inputvalues = fun.input(key, subPath);
+    //console.log(inputvalues);
+    fun.products_requester(inputvalues, done);
   });
 });
