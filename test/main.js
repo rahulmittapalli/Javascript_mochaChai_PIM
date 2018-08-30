@@ -306,24 +306,17 @@ var category_requester = function(inputvalues, done) {
 }
 
 var category_parameters = function(body, count, length) {
-  var bodyKeys = ['name', 'description', 'imageUrl', 'url', 'youtubeurl', 'id', 'parentId', 'isActive', 'createdAt', 'updatedAt', 'createdBy', 'updatedBy', 'categoryHasProducts'];
+  var bodyKeys = ['name', 'description', 'imageUrl', 'url', 'youtubeurl', 'id', 'parentId', 'isActive', 'createdAt', 'updatedAt', 'createdBy', 'updatedBy'];
   var count = body.length;
-  //console.log("count", count);
   for (var i = 0; i < count; i++) {
     bodyKeys.forEach((prop) => {
-      //console.log(prop);
       expect(body[i]).to.have.own.property(prop);
-      //console.log("main name is", body[i].name);
     })
     if (body[i].children) {
       var length = body[i].children.length;
-      //console.log(length);
-      //console.log(count);
       for (var j = 0; j < length; j++) {
         bodyKeys.forEach((prop) => {
           expect(body[i].children[j]).to.have.own.property(prop);
-          //console.log("children name ", body[i].children[j].name);
-
         })
       }
     }
